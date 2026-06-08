@@ -284,14 +284,22 @@ const qQueixa = [
 ];
 
 const qHumor = [
+  // Depressão
   "Sinto-me triste, para baixo ou sem esperança.",
   "Perco o interesse ou prazer em coisas que normalmente gosto.",
   "Me sinto sem energia ou muito cansado(a) sem motivo físico claro.",
-  "Tenho períodos de euforia, energia muito alta ou sensação de poder fazer tudo.",
-  "Meu humor oscila muito — posso ir de bem para muito mal rapidamente.",
-  "Me sinto irritado(a) ou com raiva com facilidade.",
   "Me sinto vazio(a) ou sem sentido, mesmo quando as coisas estão 'bem'.",
-  "Esses períodos de humor alterado duram dias ou semanas.",
+  // Oscilação / bipolar
+  "Tenho períodos em que minha energia está muito acima do normal — consigo fazer muito mais do que de costume.",
+  "Nesses períodos de muita energia, durmo menos do que o habitual mas não me sinto cansado(a) por isso.",
+  "Nessas fases, minha cabeça fica acelerada — muitas ideias ao mesmo tempo, falo mais rápido.",
+  "Já tomei decisões impulsivas nessas fases — gastos, projetos, relacionamentos — que depois me trouxeram problemas.",
+  "As pessoas ao redor já notaram que eu estava 'diferente' nessas fases de muita energia.",
+  "Após essas fases de alta energia, venho uma queda — fico esgotado(a) ou muito pra baixo.",
+  "Essas fases de alta energia duram dias ou semanas — não é só um dia bom.",
+  "Meu humor oscila muito — posso ir de bem para muito mal rapidamente.",
+  "Fico irritado(a) com facilidade — pequenas coisas me incomodam demais.",
+  "Essas mudanças de humor acontecem sem motivo claro — não dependem necessariamente do que está acontecendo.",
 ];
 
 const qAnsiedade = [
@@ -379,7 +387,7 @@ const qOpen = [
 
 // ── STATE ─────────────────────────────────────────────────────────────────
 let state = {
-  humor:     Array(8).fill(null),
+  humor:     Array(14).fill(null),
   ansiedade: Array(7).fill(null),
   toc:       Array(6).fill(null),
   atencao:   Array(7).fill(null),
@@ -505,7 +513,7 @@ function renderOpen(){
 }
 
 function updateProg(){
-  const total = 8+7+6+7+7+5+5+4+4+5+2;
+  const total = 14+7+6+7+7+5+5+4+4+5+2;
   let ans=0;
   SCALE_KEYS.forEach(k=>{ ans+=state[k].filter(v=>v!==null).length; });
   ans+=Object.keys(state.substancias).length;
@@ -537,7 +545,7 @@ async function submitQuiz(){
     sexo:pid.sexo, genero:pid.genero, unidade:pid.unidade,
     email_paciente:pid.email,
     queixa:state.queixa,
-    humor:state.humor,     humor_score:sum(state.humor),
+    humor:state.humor,     humor_score:sum(state.humor),  humor_max:56,
     ansiedade:state.ansiedade, ansiedade_score:sum(state.ansiedade),
     toc:state.toc,         toc_score:sum(state.toc),
     atencao:state.atencao, atencao_score:sum(state.atencao),
