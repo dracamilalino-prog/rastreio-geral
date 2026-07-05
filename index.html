@@ -398,6 +398,7 @@ let state = {
   queixa:    Array(2).fill(""),
   substancias: {},
   risco:     {},
+  risco_detalhe: {},
   historico: {},
   hist_open: Array(2).fill(""),
   open:      Array(3).fill(""),
@@ -411,7 +412,7 @@ function renderAll(){
   renderQueixa();
   SCALE_KEYS.forEach(k=>renderScale(idMap[k],qMap[k],k,5));
   renderMixed('q-substancias', qSubstancias, 'substancias');
-  renderMixed('q-risco', qRisco, 'risco');
+  renderRisco();
   renderHistorico();
   renderOpen();
   updateProg();
@@ -469,8 +470,33 @@ function renderMixed(cid, qs, stateKey){
 function setMixed(key,i,v){
   state[key][i]=decodeURIComponent(v);
   if(key==='substancias') renderMixed('q-substancias',qSubstancias,'substancias');
-  else if(key==='risco') renderMixed('q-risco',qRisco,'risco');
+  else if(key==='risco') renderRisco();
   updateProg(); autoSave();
+}
+
+// Critério de gravidade por item de risco — define quando a caixa de texto opcional aparece
+function riscoGrave(i, valor){
+  if(i===0) return valor==='Com frequência' || valor==='Estou tendo agora';
+  if(i===1) return valor==='Sim';
+  if(i===2) return valor==='Sim';
+  if(i===3) return valor==='Estou em sofrimento intenso';
+  return false;
+}
+
+function renderRisco(){
+  const c=document.getElementById('q-risco'); c.innerHTML='';
+  qRisco.forEach((item,i)=>{
+    const div=document.createElement('div'); div.className='q';
+    let inner=`<div class="q-text">${i+1}. ${item.q}</div>`;
+    const opts = item.type==='yn' ? ['Sim','Não','Não sei'] : item.opts;
+    inner+=`<div class="opts">`+opts.map(v=>
+      `<button class="opt ${state.risco[i]===v?'sel':''}" onclick="setMixed('risco',${i},'${encodeURIComponent(v)}')">${v}</button>`
+    ).join('')+`</div>`;
+    if(riscoGrave(i, state.risco[i])){
+      inner+=`<textarea class="textarea-q" style="margin-top:10px;border-color:#C0392B;" placeholder="Se quiser, pode escrever mais sobre o que você está sentindo (opcional)" oninput="state.risco_detalhe[${i}]=this.value;autoSave()">${state.risco_detalhe[i]||''}</textarea>`;
+    }
+    div.innerHTML=inner; c.appendChild(div);
+  });
 }
 
 function renderHistorico(){
@@ -554,7 +580,7 @@ async function submitQuiz(){
     sono:state.sono,       sono_score:sum(state.sono),
     corpo:state.corpo,     corpo_score:sum(state.corpo),
     substancias:state.substancias,
-    risco:state.risco, hist_open:state.hist_open,
+    risco:state.risco, risco_detalhe:state.risco_detalhe, hist_open:state.hist_open,
     historico:state.historico,
     open:state.open,
     flags:{ ideacao, automut, tentativa },
