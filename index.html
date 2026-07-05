@@ -6,19 +6,19 @@
 <title>Questionário Clínico</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f7f4ef;--card:#fff;--ink:#1c1b1f;--mid:#5a5560;--light:#e8e4dd;--accent:#3d6b84;--border:#ddd8d0;--warm:#f2ede5;}
+:root{--bg:#f7f4ef;--card:#fff;--ink:#1c1b1f;--mid:#5a5560;--light:#e8e4dd;--accent:#6B3FA0;--border:#ddd8d0;--warm:#f2ede5;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.7;}
 .cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#1c1b1f;padding:2.5rem 1.5rem;text-align:center;position:relative;overflow:hidden;}
-.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 30%,rgba(61,107,132,.25) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 70%,rgba(139,94,82,.2) 0%,transparent 70%);}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 30%,rgba(107,63,160,.28) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 70%,rgba(74,34,114,.25) 0%,transparent 70%);}
 .cover-inner{position:relative;z-index:2;max-width:560px;}
 .cover-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:2rem;}
 .cover h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.2rem);font-weight:400;color:#fff;line-height:1.2;margin-bottom:1rem;}
-.cover h1 em{font-style:italic;color:#a8c4d4;}
+.cover h1 em{font-style:italic;color:#c9aee0;}
 .cover p{color:rgba(255,255,255,.5);font-size:14px;line-height:1.9;margin-bottom:2rem;max-width:440px;margin-left:auto;margin-right:auto;}
 .cover-note{margin-top:1.5rem;font-size:11px;color:rgba(255,255,255,.25);max-width:380px;margin-left:auto;margin-right:auto;}
 .btn-next{background:var(--accent);color:#fff;border:none;padding:14px 44px;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:background .2s;margin-top:8px;}
-.btn-next:hover{background:#2d5268;}
+.btn-next:hover{background:#4A2272;}
 .id-wrap{max-width:680px;margin:0 auto;padding:2.5rem 1.5rem;}
 .id-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:28px;}
 .id-card h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:6px;}
@@ -29,7 +29,7 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);font-si
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
 .field textarea{resize:vertical;min-height:80px;}
 .radio-row{display:flex;gap:10px;flex-wrap:wrap;}
-.radio-btn{border:1.5px solid var(--border);background:#fff;padding:9px 20px;border-radius:20px;font-family:'Lato',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;color:var(--ink);}
+.radio-btn{border:1.5px solid var(--border);background:#fff;padding:12px 20px;min-height:44px;border-radius:20px;font-family:'Lato',sans-serif;font-size:14px;cursor:pointer;transition:all .15s;color:var(--ink);}
 .radio-btn:hover{border-color:var(--accent);}
 .radio-btn.sel{border-color:var(--accent);background:var(--accent);color:#fff;}
 .quiz-wrap{display:none;max-width:740px;margin:0 auto;padding:2rem 1.5rem 5rem;}
@@ -50,12 +50,12 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);font-si
 .q-text{font-size:14px;color:#2a2630;margin-bottom:10px;}
 .q-hint{font-size:12px;color:#999;margin-bottom:10px;font-style:italic;}
 .opts{display:flex;gap:7px;flex-wrap:wrap;}
-.opt{border:1.5px solid var(--border);background:#fff;padding:7px 16px;border-radius:20px;font-family:'Lato',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;color:var(--ink);}
-.opt:hover{border-color:var(--accent);background:#eef4f8;}
+.opt{border:1.5px solid var(--border);background:#fff;padding:12px 18px;min-height:44px;border-radius:20px;font-family:'Lato',sans-serif;font-size:14px;cursor:pointer;transition:all .15s;color:var(--ink);}
+.opt:hover{border-color:var(--accent);background:#f0e8ff;}
 .opt.sel{border-color:var(--accent);background:var(--accent);color:#fff;}
 .num-opts{display:flex;gap:8px;flex-wrap:wrap;}
 .num-opt{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--border);background:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;color:var(--ink);display:flex;align-items:center;justify-content:center;}
-.num-opt:hover{border-color:var(--accent);background:#eef4f8;}
+.num-opt:hover{border-color:var(--accent);background:#f0e8ff;}
 .num-opt.sel{border-color:var(--accent);background:var(--accent);color:#fff;}
 .textarea-q{width:100%;border:1.5px solid var(--border);border-radius:4px;padding:10px 14px;font-family:'Lato',sans-serif;font-size:14px;resize:vertical;min-height:80px;color:var(--ink);background:#fff;transition:border .15s;}
 .textarea-q:focus{outline:none;border-color:var(--accent);}
@@ -99,6 +99,7 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);font-si
       </div>
       <div class="field">
         <label>Identidade de gênero</label>
+        <p style="font-size:12px;color:var(--mid);margin-bottom:10px;line-height:1.6;">Cis = você se identifica com o gênero que te disseram ao nascer. Trans = você não se identifica. Se nenhum termo fizer sentido pra você, escolha "Outro" ou "Prefiro não informar".</p>
         <div class="radio-row">
           <button class="radio-btn" onclick="setSingle('genero','Mulher cis',this)">Mulher cis</button>
           <button class="radio-btn" onclick="setSingle('genero','Homem cis',this)">Homem cis</button>
@@ -560,7 +561,7 @@ async function submitQuiz(){
   };
 
   try {
-    await fetch(APPS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    await fetch(APPS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
   } catch(e){console.error(e);}
 
   clearSave();
